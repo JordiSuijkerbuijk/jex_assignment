@@ -1,0 +1,22 @@
+<div>
+  <label for="name">Company List: </label>
+  <ul class="companies">
+    <li *ngFor="let company of companies">
+      <span>{{ company.name }}</span>
+      <span>{{ company.address }}</span>
+    </li>
+  </ul>
+</div>
+
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Address</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let company of companies">
+      <td>{{ company.name }}</td>
+      <td>{{ company.address }}</td>
+    </tr>
+  </tbody>
+</table>
