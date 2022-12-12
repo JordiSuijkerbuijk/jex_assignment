@@ -13,6 +13,8 @@ export class CompaniesComponent {
   constructor(private companyService: CompanyService) {}
 
   ngOnInit(): void {
-    this.companies = this.companyService.getCompanies();
+    this.companyService
+      .getCompanies()
+      .subscribe((result: Company[]) => (this.companies = result));
   }
 }

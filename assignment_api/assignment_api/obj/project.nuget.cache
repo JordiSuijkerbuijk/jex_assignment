@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "gem2fJ9nInhnaUyWd/I7jecg/u3WtqoMdlk8tnu2MhpgM74GOZmIo1cJm9Na7M6ShvSq7JUxv2L9qYAoDmI2aA==",
+  "success": true,
+  "projectFilePath": "D:\\code\\jex_assignment\\assignment_api\\assignment_api\\assignment_api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Jordi\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Jordi\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "C:\\Users\\Jordi\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "C:\\Users\\Jordi\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}
