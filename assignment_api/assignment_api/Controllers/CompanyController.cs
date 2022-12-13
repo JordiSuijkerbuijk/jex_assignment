@@ -52,7 +52,7 @@ namespace assignment_api.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<Company>> UpdateCompany(Company company)
+        public async Task<ActionResult<List<Company>>> UpdateCompany(Company company)
         {
             var heroInDb = await _context.Company.FindAsync(company.Id);
 
@@ -66,7 +66,7 @@ namespace assignment_api.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok(company);
+            return Ok(await _context.Company.ToListAsync());
         }
 
         [HttpDelete("{id:int}")]

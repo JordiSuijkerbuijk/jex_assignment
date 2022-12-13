@@ -14,4 +14,11 @@ export class CompanyService {
   public getCompanies(): Observable<Company[]> {
     return this.http.get<Company[]>(`${environment.apiUrl}/${this.url}`);
   }
+
+  public updateCompany(company: Company): Observable<Company[]> {
+    return this.http.put<Company[]>(
+      `${environment.apiUrl}/${this.url}`,
+      company
+    );
+  }
 }
