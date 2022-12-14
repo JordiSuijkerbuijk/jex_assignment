@@ -6,9 +6,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CompaniesListComponent } from './components/companies-list/companies-list.component';
+import { VacanciesListComponent } from './components/vacancies-list/vacancies-list.component';
 
 @NgModule({
-  declarations: [AppComponent, CompaniesListComponent],
+  declarations: [AppComponent, CompaniesListComponent, VacanciesListComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],

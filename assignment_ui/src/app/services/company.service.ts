@@ -15,10 +15,23 @@ export class CompanyService {
     return this.http.get<Company[]>(`${environment.apiUrl}/${this.url}`);
   }
 
+  public createCompany(company: Company): Observable<Company[]> {
+    return this.http.post<Company[]>(
+      `${environment.apiUrl}/${this.url}`,
+      company
+    );
+  }
+
   public updateCompany(company: Company): Observable<Company[]> {
     return this.http.put<Company[]>(
       `${environment.apiUrl}/${this.url}`,
       company
+    );
+  }
+
+  public deleteCompany(company: Company): Observable<Company[]> {
+    return this.http.delete<Company[]>(
+      `${environment.apiUrl}/${this.url}/${company.id}`
     );
   }
 }

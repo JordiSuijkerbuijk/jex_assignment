@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ModalService } from 'src/app/services/modal.service';
 import { Company } from '../../models/company';
 import { CompanyService } from '../../services/company.service';
 
@@ -9,43 +10,51 @@ import { CompanyService } from '../../services/company.service';
 })
 export class CompaniesListComponent {
   //All companies that are listed on the homepage
-  companies: Company[] = [];
-  @Input() selectedCompany: Company = { name: '', address: '' };
+  @Input() companies: Company[];
+  company?: Company;
+  @Output() updatedCompanies = new EventEmitter<Company[]>();
+  @Input() element?: HTMLElement;
   editing: boolean = false;
-  element: HTMLElement | undefined = undefined;
 
-  constructor(private companyService: CompanyService) {}
+  constructor(
+    private companyService: CompanyService,
+    private modalService: ModalService
+  ) {
+    this.companies = [];
+  }
 
-  ngOnInit(): void {
-    //Fetch companies shown on the page
+  ngOnInit(): void {}
+
+  deleteCompany(company: Company): void {
     this.companyService
-      .getCompanies()
-      .subscribe((result: Company[]) => (this.companies = result));
-
-    this.element = document.querySelector(`#modal`) as HTMLElement;
+      .deleteCompany(company)
+      .subscribe((companies) => this.updatedCompanies.emit(companies));
   }
 
-  //Function that changes the selectedCompany
-  setSelectedCompany(companyIndex: number): void {
-    this.selectedCompany = this.companies[companyIndex];
-  }
-
-  //Function that toggles the modal and sets the selectedCompany
-  toggleModal(companyIndex?: number): void {
-    if (this.element) {
-      this.element.classList.toggle('open');
-    }
-
-    if (typeof companyIndex === 'number') {
-      this.setSelectedCompany(companyIndex);
-    }
-  }
-
-  toggleEditing(company: Company): void {
-    console.log('company', company);
-    this.editing = !this.editing;
+  updateCompany(company: Company): void {
     this.companyService
       .updateCompany(company)
-      .subscribe((companies: Company[]) => (this.companies = companies));
+      .subscribe((companies) => this.updatedCompanies.emit(companies));
+    this.toggleEditing();
+  }
+
+  createCompany(): void {
+    this.companyService
+      .createCompany({ name: 'tet', address: 'yeet' })
+      .subscribe((companies) => this.updatedCompanies.emit(companies));
+    this.toggleModal();
+  }
+
+  toggleEditing(company?: Company): void {
+    this.editing = !this.editing;
+    if (company) {
+      this.company = company;
+    }
+  }
+
+  toggleModal(): void {
+    if (this.element) {
+      this.modalService.toggleModal(this.element);
+    }
   }
 }

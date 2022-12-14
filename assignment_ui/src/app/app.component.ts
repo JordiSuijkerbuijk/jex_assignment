@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Company } from './models/company';
+import { CompanyService } from './services/company.service';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +8,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'Jex assignment';
+  companies: Company[] = [{ name: '', address: '' }];
+  modalElement?: HTMLElement;
 
-  ngOnInit(): void {}
+  constructor(private companyService: CompanyService) {}
+
+  ngOnInit(): void {
+    //Fetch companies shown on the page
+    this.companyService
+      .getCompanies()
+      .subscribe((result: Company[]) => (this.companies = result));
+
+    this.modalElement = document.querySelector(`#modal`) as HTMLElement;
+  }
+
+  updateCompaniesList(companies: Company[]) {
+    this.companies = companies;
+  }
 }

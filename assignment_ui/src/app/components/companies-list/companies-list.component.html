@@ -1,34 +1,49 @@
-<div class="list-wrapper">
-  <div *ngFor="let company of companies;let i = index" class="list"
-  (click)="toggleModal(i)">
-    <h2 class="heading">{{ company.name }}</h2>
-    <p class="paragraph">{{ company.address }}</p>
-  </div>
-</div>
 
-<div id="modal" class="modal">
-  <div class="content" *ngIf="selectedCompany">
-    <!-- Content for companies -->
-    <div class="company-content">
+
+<div class="list-wrapper">
+  <div *ngFor="let company of companies" class="list">
+    <div class="content-wrapper">
       <div class="input-wrapper">
-        <label>Company name</label>
-        <input type="text" id="name" value="{{selectedCompany.name}}" [(ngModel)]="selectedCompany.name" [disabled]="!editing">
+        <input type="text" [ngClass]="{'text': !editing}" id="name" value="{{company.name}}" [(ngModel)]="company.name" [disabled]="!editing">
+        <input type="text" [ngClass]="{'text': !editing}" value="{{company.address}}" [(ngModel)]="company.address" [disabled]="!editing">
       </div>
-      <div class="input-wrapper">
-        <label>Company Address</label>
-        <input type="text" id="address" value="{{selectedCompany.address}}" [(ngModel)]="selectedCompany.address" [disabled]="!editing">
+      <div class="button-wrapper">
+        <button class="edit" (click)="editing ? updateCompany(company) : toggleEditing(company)">
+          <div *ngIf="!editing; else submitTemplate">Edit</div>
+          <ng-template #submitTemplate>
+              Submit
+          </ng-template>
+        </button>
+        <button class="delete" (click)="deleteCompany(company)">
+          <div>Delete</div>
+        </button>
       </div>
-      <!-- edit button -->
-      <button class="edit" (click)="toggleEditing(selectedCompany)">
-        <!-- edit Icon -->
-        <div *ngIf="!editing; else submitTemplate">Edit</div>
-        <ng-template #submitTemplate>
-            Submit
-        </ng-template>
-      </button>
     </div>
-    <!-- Close button -->
-    <button class="close" (click)="toggleModal()">x</button>
   </div>
-  <div class="backdrop" (click)="toggleModal()"></div>
+
+  <button class="create" (click)="toggleModal()">
+    Create
+  </button>
+  <div id="modal" class="modal">
+    <div class="content">
+      <!-- Content for companies -->
+      <div class="company-content">
+        <div class="input-wrapper">
+          <label>Company name</label>
+          <input type="text" ngModal id="name" >
+        </div>
+        <div class="input-wrapper">
+          <label>Company Address</label>
+          <input type="text" id="address">
+        </div>
+      </div>
+  
+      <button class="submit" (click)="createCompany()">submit</button>
+  
+  
+      <!-- Close button -->
+      <button class="close" (click)="toggleModal()">x</button>
+    </div>
+    <div class="backdrop" (click)="toggleModal()"></div>
+  </div>
 </div>

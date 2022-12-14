@@ -70,7 +70,7 @@ namespace assignment_api.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult<Company>> DeleteCompany(int id)
+        public async Task<ActionResult<List<Company>>> DeleteCompany(int id)
         {
             var heroInDb = await _context.Company.FindAsync(id);
 
@@ -82,7 +82,7 @@ namespace assignment_api.Controllers
             _context.Company.Remove(heroInDb);
             await _context.SaveChangesAsync();
 
-            return Ok(heroInDb);
+            return Ok(await _context.Company.ToListAsync());
         }
     }
 }
