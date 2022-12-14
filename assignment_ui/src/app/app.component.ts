@@ -8,7 +8,7 @@ import { CompanyService } from './services/company.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  companies: Company[] = [{ name: '', address: '' }];
+  companies: Company[] = [];
   modalElement?: HTMLElement;
 
   constructor(private companyService: CompanyService) {}

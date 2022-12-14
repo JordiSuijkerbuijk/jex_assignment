@@ -30,11 +30,11 @@
       <div class="company-content">
         <div class="input-wrapper">
           <label>Company name</label>
-          <input type="text" ngModal id="name" >
+          <input type="text" [(ngModel)]="company.name" id="name" >
         </div>
         <div class="input-wrapper">
           <label>Company Address</label>
-          <input type="text" id="address">
+          <input type="text" [(ngModel)]="company.address" id="address">
         </div>
       </div>
   

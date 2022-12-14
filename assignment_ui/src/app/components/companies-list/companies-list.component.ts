@@ -11,7 +11,7 @@ import { CompanyService } from '../../services/company.service';
 export class CompaniesListComponent {
   //All companies that are listed on the homepage
   @Input() companies: Company[];
-  company?: Company;
+  company: Company;
   @Output() updatedCompanies = new EventEmitter<Company[]>();
   @Input() element?: HTMLElement;
   editing: boolean = false;
@@ -21,6 +21,7 @@ export class CompaniesListComponent {
     private modalService: ModalService
   ) {
     this.companies = [];
+    this.company = { name: '', address: '', vacancies: [] };
   }
 
   ngOnInit(): void {}
@@ -40,7 +41,7 @@ export class CompaniesListComponent {
 
   createCompany(): void {
     this.companyService
-      .createCompany({ name: 'tet', address: 'yeet' })
+      .createCompany(this.company)
       .subscribe((companies) => this.updatedCompanies.emit(companies));
     this.toggleModal();
   }

@@ -7,5 +7,6 @@ namespace assignment_api.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         public DbSet<Company> Company => Set<Company>();
+        public DbSet<Vacancy> Vacancy => Set<Vacancy>();
     }
 }

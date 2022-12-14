@@ -54,15 +54,15 @@ namespace assignment_api.Controllers
         [HttpPut]
         public async Task<ActionResult<List<Company>>> UpdateCompany(Company company)
         {
-            var heroInDb = await _context.Company.FindAsync(company.Id);
+            var companyInDb = await _context.Company.FindAsync(company.Id);
 
-            if (heroInDb== null)
+            if (companyInDb == null)
             {
                 return BadRequest("Company not found");
             }
 
-            heroInDb.Name = company.Name;
-            heroInDb.Address = company.Address; 
+            companyInDb.Name = company.Name;
+            companyInDb.Address = company.Address; 
 
             await _context.SaveChangesAsync();
 
@@ -72,14 +72,14 @@ namespace assignment_api.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<List<Company>>> DeleteCompany(int id)
         {
-            var heroInDb = await _context.Company.FindAsync(id);
+            var companyInDb = await _context.Company.FindAsync(id);
 
-            if (heroInDb == null)
+            if (companyInDb == null)
             {
                 return BadRequest("Company not found");
             }
 
-            _context.Company.Remove(heroInDb);
+            _context.Company.Remove(companyInDb);
             await _context.SaveChangesAsync();
 
             return Ok(await _context.Company.ToListAsync());
