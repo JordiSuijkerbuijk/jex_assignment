@@ -20,7 +20,7 @@ namespace assignment_api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Company>>> getCompanies()
         {
-            return Ok(await _context.Company.ToListAsync());
+            return Ok(await _context.Company.Include(x => x.Vacancies).ToListAsync());
         }
 
         [HttpGet("{id:int}")]
@@ -54,7 +54,7 @@ namespace assignment_api.Controllers
         [HttpPut]
         public async Task<ActionResult<List<Company>>> UpdateCompany(Company company)
         {
-            var companyInDb = await _context.Company.FindAsync(company.Id);
+            var companyInDb = await _context.Company.FindAsync(company.CompanyId);
 
             if (companyInDb == null)
             {

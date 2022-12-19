@@ -24,11 +24,11 @@ namespace assignmentapi.Migrations
 
             modelBuilder.Entity("assignment_api.Company", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CompanyId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompanyId"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -38,7 +38,7 @@ namespace assignmentapi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("CompanyId");
 
                     b.ToTable("Company");
                 });

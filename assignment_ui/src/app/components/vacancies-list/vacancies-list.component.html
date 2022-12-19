@@ -1,0 +1,49 @@
+
+
+<div class="list-wrapper" *ngIf="company">
+  <div *ngFor="let vacancy of vacancies" class="list">
+    <div class="content-wrapper">
+      <div class="input-wrapper">
+        <input type="text" [ngClass]="{'text': !editing}" id="title" value="{{vacancy.title}}" [(ngModel)]="vacancy.title" [disabled]="!editing">
+        <input type="text" [ngClass]="{'text': !editing}" id="description" value="{{vacancy.description}}" [(ngModel)]="vacancy.description" [disabled]="!editing">
+      </div>
+      <div class="button-wrapper">
+        <button class="edit" (click)="editing ? updateVacancy(vacancy) : toggleEditing(vacancy)">
+          <div *ngIf="!editing; else submitTemplate">Edit</div>
+          <ng-template #submitTemplate>
+              Submit
+          </ng-template>
+        </button>
+        <button class="delete" (click)="deleteVacancy(vacancy)">
+          <div>Delete</div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <button class="create" (click)="toggleModal()">
+    Create
+  </button>
+  <div id="vacancyModal" class="modal">
+    <div class="content">
+      <!-- Content for vacancies -->
+      <div class="company-content">
+        <div class="input-wrapper">
+          <label>Vacancy title</label>
+          <input type="text" [(ngModel)]="vacancy.title" id="title" >
+        </div>
+        <div class="input-wrapper">
+          <label>Vacancy description</label>
+          <input type="text" [(ngModel)]="vacancy.description" id="description">
+        </div>
+      </div>
+  
+      <button class="submit" (click)="createVacancy()">submit</button>
+  
+  
+      <!-- Close button -->
+      <button class="close" (click)="toggleModal()">x</button>
+    </div>
+    <div class="backdrop" (click)="toggleModal()"></div>
+  </div>
+</div>

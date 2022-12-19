@@ -2,7 +2,7 @@
 
 <div class="list-wrapper">
   <div *ngFor="let company of companies" class="list">
-    <div class="content-wrapper">
+    <div class="content-wrapper" (click)="changeSelectedCompany(company)">
       <div class="input-wrapper">
         <input type="text" [ngClass]="{'text': !editing}" id="name" value="{{company.name}}" [(ngModel)]="company.name" [disabled]="!editing">
         <input type="text" [ngClass]="{'text': !editing}" value="{{company.address}}" [(ngModel)]="company.address" [disabled]="!editing">
@@ -24,7 +24,7 @@
   <button class="create" (click)="toggleModal()">
     Create
   </button>
-  <div id="modal" class="modal">
+  <div id="companyModal" class="modal">
     <div class="content">
       <!-- Content for companies -->
       <div class="company-content">

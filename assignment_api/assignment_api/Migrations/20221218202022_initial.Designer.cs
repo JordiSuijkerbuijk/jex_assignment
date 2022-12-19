@@ -12,8 +12,8 @@ using assignment_api.Data;
 namespace assignmentapi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221214234432_CreatedVacancy")]
-    partial class CreatedVacancy
+    [Migration("20221218202022_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,11 @@ namespace assignmentapi.Migrations
 
             modelBuilder.Entity("assignment_api.Company", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CompanyId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompanyId"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -41,7 +41,7 @@ namespace assignmentapi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("CompanyId");
 
                     b.ToTable("Company");
                 });

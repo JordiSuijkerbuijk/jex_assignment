@@ -31,7 +31,7 @@ export class CompanyService {
 
   public deleteCompany(company: Company): Observable<Company[]> {
     return this.http.delete<Company[]>(
-      `${environment.apiUrl}/${this.url}/${company.id}`
+      `${environment.apiUrl}/${this.url}/${company.companyId}`
     );
   }
 }

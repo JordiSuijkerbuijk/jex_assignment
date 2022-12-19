@@ -1,3 +1,5 @@
-<div>
-  <app-companies-list [element]="modalElement" [companies]="companies" (updatedCompanies)="updateCompaniesList($event)"></app-companies-list>
+<div class="wrapper">
+  <app-companies-list [element]="companyModal" [companies]="companies"
+  (updatedCompanies)="updateCompaniesList($event)" (selectedCompany)="updateSelectedCompany($event)"></app-companies-list>
+  <app-vacancies-list [company]="selectedCompany" [vacancies]="vacancies" (updatedVacancies)="updateVacanciesList($event)"></app-vacancies-list>
 </div>

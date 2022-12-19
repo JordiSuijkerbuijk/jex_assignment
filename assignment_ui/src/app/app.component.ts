@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Company } from './models/company';
+import { Vacancy } from './models/vacancy';
 import { CompanyService } from './services/company.service';
+import { VacancyService } from './services/vacancy.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +11,15 @@ import { CompanyService } from './services/company.service';
 })
 export class AppComponent {
   companies: Company[] = [];
-  modalElement?: HTMLElement;
+  vacancies: Vacancy[] = [];
+  companyModal?: HTMLElement;
+  vacancyModal?: HTMLElement;
+  selectedCompany?: Company;
 
-  constructor(private companyService: CompanyService) {}
+  constructor(
+    private companyService: CompanyService,
+    private vacancyService: VacancyService
+  ) {}
 
   ngOnInit(): void {
     //Fetch companies shown on the page
@@ -19,10 +27,31 @@ export class AppComponent {
       .getCompanies()
       .subscribe((result: Company[]) => (this.companies = result));
 
-    this.modalElement = document.querySelector(`#modal`) as HTMLElement;
+    this.selectedCompany = this.companies[0];
+
+    this.fetchVacancies(this.companies[0]);
+
+    this.companyModal = document.querySelector('#companyModal') as HTMLElement;
   }
 
   updateCompaniesList(companies: Company[]) {
     this.companies = companies;
+  }
+
+  updateVacanciesList(vacancies: Vacancy[]) {
+    this.vacancies = vacancies;
+  }
+
+  updateSelectedCompany(company: Company) {
+    if (company === this.selectedCompany) return;
+    this.selectedCompany = company;
+    this.fetchVacancies(company);
+  }
+
+  fetchVacancies(company: Company) {
+    if (!company) return;
+    this.vacancyService
+      .getVacancies(company)
+      .subscribe((result: Vacancy[]) => (this.vacancies = result));
   }
 }

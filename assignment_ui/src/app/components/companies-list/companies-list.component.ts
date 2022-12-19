@@ -6,14 +6,15 @@ import { CompanyService } from '../../services/company.service';
 @Component({
   selector: 'app-companies-list',
   templateUrl: './companies-list.component.html',
-  styleUrls: ['./companies-list.component.scss'],
+  styleUrls: ['./companies-list.component.scss', '../../../styles.scss'],
 })
 export class CompaniesListComponent {
   //All companies that are listed on the homepage
   @Input() companies: Company[];
-  company: Company;
-  @Output() updatedCompanies = new EventEmitter<Company[]>();
   @Input() element?: HTMLElement;
+  @Output() updatedCompanies = new EventEmitter<Company[]>();
+  @Output() selectedCompany = new EventEmitter<Company>();
+  company: Company;
   editing: boolean = false;
 
   constructor(
@@ -44,6 +45,7 @@ export class CompaniesListComponent {
       .createCompany(this.company)
       .subscribe((companies) => this.updatedCompanies.emit(companies));
     this.toggleModal();
+    this.company = { name: '', address: '', vacancies: [] };
   }
 
   toggleEditing(company?: Company): void {
@@ -57,5 +59,9 @@ export class CompaniesListComponent {
     if (this.element) {
       this.modalService.toggleModal(this.element);
     }
+  }
+
+  changeSelectedCompany(company: Company): void {
+    this.selectedCompany.emit(company);
   }
 }
