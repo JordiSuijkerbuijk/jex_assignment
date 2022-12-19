@@ -5,7 +5,10 @@
     <div class="content-wrapper">
       <div class="input-wrapper">
         <input type="text" [ngClass]="{'text': !editing}" id="title" value="{{vacancy.title}}" [(ngModel)]="vacancy.title" [disabled]="!editing">
-        <input type="text" [ngClass]="{'text': !editing}" id="description" value="{{vacancy.description}}" [(ngModel)]="vacancy.description" [disabled]="!editing">
+        <textarea rows="auto" [ngClass]="{'text': !editing}"
+        [(ngModel)]="vacancy.description" [disabled]="!editing">
+          {{vacancy.description}}
+        </textarea>
       </div>
       <div class="button-wrapper">
         <button class="edit" (click)="editing ? updateVacancy(vacancy) : toggleEditing(vacancy)">

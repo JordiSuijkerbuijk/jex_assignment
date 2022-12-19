@@ -5,7 +5,10 @@
     <div class="content-wrapper" (click)="changeSelectedCompany(company)">
       <div class="input-wrapper">
         <input type="text" [ngClass]="{'text': !editing}" id="name" value="{{company.name}}" [(ngModel)]="company.name" [disabled]="!editing">
-        <input type="text" [ngClass]="{'text': !editing}" value="{{company.address}}" [(ngModel)]="company.address" [disabled]="!editing">
+        <textarea rows="1" [ngClass]="{'text': !editing}"
+        [(ngModel)]="company.address" [disabled]="!editing">
+        {{company.address}}
+        </textarea>
       </div>
       <div class="button-wrapper">
         <button class="edit" (click)="editing ? updateCompany(company) : toggleEditing(company)">

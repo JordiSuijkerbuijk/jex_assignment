@@ -12,7 +12,7 @@ using assignment_api.Data;
 namespace assignmentapi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221218202022_initial")]
+    [Migration("20221219162826_initial")]
     partial class initial
     {
         /// <inheritdoc />

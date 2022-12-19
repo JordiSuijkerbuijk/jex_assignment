@@ -79,6 +79,14 @@ namespace assignment_api.Controllers
                 return BadRequest("Company not found");
             }
 
+
+            var vacancyList = await _context.Vacancy.Include(x => x.Company).Where(x => x.Company.CompanyId == companyInDb.CompanyId).ToListAsync();
+            if (vacancyList.Count > 0) { 
+                _context.Vacancy.RemoveRange(vacancyList);
+                await _context.SaveChangesAsync();
+            }
+
+
             _context.Company.Remove(companyInDb);
             await _context.SaveChangesAsync();
 
